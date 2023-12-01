@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+       body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    padding: 20px;
+    text-align: center;
+}
+
+h1 {
+    color: #ff0000;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+input {
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+button {
+    padding: 10px;
+    background-color: #4CAF50;
+    color: rgb(255, 255, 255);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+p {
+    margin-top: 20px;
+    color: #7d00f1;
+}
+    </style>
+    
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Costo Marginal</title>
+    <script>
+        // Función para calcular la derivada
+        function calcularDerivada(f, x, h = 0.0001) {
+            return (f(x + h) - f(x)) / h;
+        }
+      
+
+        // Función de costo total (CT(x))
+        function costoTotal(x) {
+            
+            return 2 * Math.pow(x, 2) + 3 * x + 5;
+        }
+
+       
+        function costoMarginal(x) {
+            return calcularDerivada(costoTotal, x);
+        }
+
+        // Función para mostrar el resultado en la página
+        function calcularCostoMarginal() {
+            var inputX = document.getElementById('inputX');
+            var resultado = document.getElementById('resultado');
+
+            var x = parseFloat(inputX.value);
+
+            if (!isNaN(x)) {
+                var cm = costoMarginal(x);
+                resultado.textContent = 'El costo marginal en x=' + x + ' es: ' + cm;
+            } else {
+                resultado.textContent = 'Ingresa un valor válido para x.';
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Calculadora de Costo Marginal</h1>
+    
+    <label for="inputX">Ingresa el valor de x:</label>
+    <input type="text" id="inputX" placeholder="Ingrese el valor de x">
+
+    <button onclick="calcularCostoMarginal()">Calcular Costo Marginal</button>
+
+    <p id="resultado"></p>
+</body>
+</html>
